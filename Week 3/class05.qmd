@@ -1,0 +1,177 @@
+---
+title: "Class 05: Data Visualization with GGPLOT"
+author: "Katherine Quach (A18541014)"
+format: pdf
+toc: true
+---
+
+## Background
+
+There are multiple ways to make figures in R, and some of these include "Base R" graphics (e.g. `plot()`) and many add-on packages like **ggplot2**
+
+For instance, we will make the same plot with:
+
+```{r}
+head(cars)
+```
+
+```{r}
+plot(cars)
+```
+First we need to install necessary package with the command 
+`install.packages()`
+
+> **N.B.** we never run and install cmd in a quarto code chunk or it will reinstall packages AGAIN, and multiple times (not what we want!)
+
+Every time we want to use one of these "add-on" packages we need to load it up in R with the `library()` function
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ggplot(cars)
+```
+
+Every ggplot needs 3 things:
+
+- The **data**, the stuff you want  plotted
+- The **aes**thetics, how the data map to the plot
+- The **geom**etry, the type of plot
+
+```{r}
+ggplot(cars) + 
+  aes(x = speed, y = dist) + 
+  geom_point()
+```
+
+Let's add a line to show the relationship between two entities and then render it out!
+```{r}
+p <- ggplot(cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(title = "Stopping Distance of Old Cars",
+       subtitles = "Data from Cars Object",
+       x = "Speed (mph)", y = "Distance (ft)")
+p + theme_bw()
+```
+
+## Gene expression plot
+
+We can read the input data from the class website
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+```
+
+Let's plot our first version
+```{r}
+ggplot(genes) + 
+  aes(Condition1, Condition2) +
+  geom_point()
+```
+
+```{r}
+table(genes$State)
+```
+
+Let's plot version 2 by coloring by `State` so we can see up and down significant genes compared to the unchanging genes
+```{r}
+ggplot(genes) + 
+  aes(Condition1, Condition2, col = State) +
+  geom_point()
+```
+
+Let's plot version 3 by modifying colors to our liking
+```{r}
+ggplot(genes) + 
+  aes(Condition1, Condition2, col = State) +
+  geom_point() + 
+  scale_colour_manual(values = c("skyblue","gray","darkred"))+
+  labs(x = "Control(no drug)", y = "Drug", title = "Gene Expression Changes Upon GLP-1") + theme_bw()
+```
+
+## Let's go further
+```{r}
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+```
+
+```{r}
+head(gapminder, 3)
+```
+
+```{r}
+ggplot(data = gapminder) +
+  aes(x = gdpPercap, y = lifeExp, col = continent) +
+  geom_point(alpha = 0.3)
+```
+
+Let's "facet" (i.e. make a separate plot) by continent
+```{r}
+ggplot(data = gapminder) +
+  aes(x = gdpPercap, y = lifeExp, col = continent) +
+  geom_point(alpha = 0.3) + 
+  facet_wrap(~continent)
+```
+
+## Custom plots
+
+How big is this gapminder dataset?
+```{r}
+nrow(gapminder)
+ncol(gapminder)
+```
+To filter down a subset of the data, let's use the **dplyr** package
+
+First I need to install it, then load it
+`install.packages("dplyr")` and then `library("dplyr")`
+```{r}
+library(dplyr)
+
+gapminder_2007 <- filter(gapminder, year == 2007)
+head(gapminder_2007)
+```
+
+```{r}
+filter(gapminder_2007, country == "Ireland")
+```
+
+```{r}
+filter(gapminder, year == 2007, country == "Ireland")
+```
+
+```{r}
+filter(gapminder, year == 2007, country == "United States")
+```
+
+> Q. Make a plot comparing 1977 and 2007 for all countries
+
+```{r}
+input <- filter(gapminder, year %in% c(1977,2007))
+ggplot(data = input) +
+  aes(x = gdpPercap, y = lifeExp, col = continent, size = pop) +
+  geom_point(alpha = 0.3) + 
+  facet_wrap(~year)
+```
+
+## Bar Charts
+
+```{r}
+gapminder_top5 <- gapminder %>% 
+  filter(year == 2007) %>% 
+  arrange(desc(pop)) %>% 
+  top_n(5, pop)
+```
+
+> Q. Create a bar chart showing the life expectancy of the five biggest countries by population in 2007
+
+```{r}
+ggplot(gapminder_top5) +
+  aes(x = reorder(country, -pop), y = pop, fill = country) +
+  geom_col(col = "gray30") +
+  guides(fill = "none") + labs(x = "Country", y = "Population", title = "Life Expectancy of 5 Biggest Countries in 2007")
+```

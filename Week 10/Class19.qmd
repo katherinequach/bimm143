@@ -1,0 +1,94 @@
+---
+title: "Class 19: Mini Project Cancer Mutation Analysis"
+author: "Katherine Quach (A18541014)"
+format: pdf
+toc: TRUE
+---
+
+## Background
+
+To identify somatic mutations in a tumor, DNA from the tumor is sequenced and compared to DNA from normal tissue in the same individual using variant calling algorithms.
+
+Comparison of tumor sequences to those from normal tissue (rather than ‘the human genome’) is important to ensure that the detected differences are not germline mutations.
+
+To identify which of the somatic mutations leads to the production of aberrant proteins, the location of the mutation in the genome is inspected to identify non-synonymous mutations
+(i.e. those that fall into protein coding regions and change the encoded amino acid).
+
+I downloaded my sequence from the class website and moved it to my working directory:
+
+> Q1. What protein do these sequences correspond to? (Give both full gene/protein name and official symbol).
+
+From a **BLASTp** search against human refseq I see that it is:
+
+- Official Symbol: JAK2
+- Official Full Name: Janus kinase 2
+
+```{r}
+library(bio3d)
+
+seq <- read.fasta("A18541014_mutant_seq.fa")
+seq
+```
+
+> Q2. What are the tumor specific mutations in this particular case (e.g. A130V)?
+
+We could score residue conservation then find the non 1.0 scoring position. These will be the mutation positions:
+```{r}
+conserv(seq)
+```
+
+```{r}
+mutation.sites <- which(conserv(seq) < 1)
+```
+
+```{r}
+paste(seq$ali[1, mutation.sites],
+mutation.sites,
+seq$ali[2, mutation.sites])
+```
+
+> Q3. Do your mutations cluster to any particular domain and if so give the name and PFAM id of this domain? Alternately note whether your protein is single domain and provide it’s PFAM id/accession and name (e.g. PF00613 and PI3Ka).
+
+Domains from InterPro search: (https://www.ebi.ac.uk/interpro/result/InterProScan/iprscan5-R20260310-182219-0230-34038458-p1m/internal-1773166935369-54-1/)
+
+PFAM:
+![](Q3.png)
+
+Description & Coordinates:
+"R 565 V" - Phosphorylase Kinase; domain 1 (521-628) and Transferase(Phosphotransferase) domain 1 (629-816)
+
+"S 633 E" - Transferase(Phosphotransferase) domain 1 (629-816)
+
+"P 708 R" - Transferase(Phosphotransferase) domain 1 (629-816)
+
+Use this website for Q4-5 (https://portal.gdc.cancer.gov/genes/ENSG00000096968)
+
+> Q4. Using the NCI-GDC list the observed top 2 missense mutations in this protein (amino acid substitutions)?
+
+JAK2 R683G - chr9:g.5078360A>G
+JAK2 T875N - chr9:g.5089726C>A
+
+> Q5. What two TCGA projects have the most cases affected by mutations of this gene? (Give the TCGA “code” and “Project Name” for example “TCGA-BRCA” and “Breast Invasive
+Carcinoma”).
+
+TCGA-UCEC - Uterine Corpus Endometrial Carcinoma
+TARGET-AML - Acute Myeloid Leukemia
+
+> Q6. List one RCSB PDB identifier with 100% identity to the wt_healthy sequence and detail the percent coverage of your query sequence for this known structure? Alternately, provide the most similar in sequence PDB structure along with it’s percent identity, coverage and E-value. Does this structure “cover” (i.e. include or span the amino acid residue positions) of your previously identified tumor specific mutations?
+
+**Chain A, Tyrosine-protein kinase JAK2 [Homo sapiens]**
+- Query Coverage: **42%**
+- Percent Identity: **100.00%**
+- E-value: **0.0**
+
+![](5P21.png)
+
+
+## Optional Extension
+
+> Q7. Using AlphaFold notebook generate a structural model using the default parameters for your mutant sequence.
+
+![](7616051CAC67C661.png)
+
+> Q8. Considering only your mutations in high quality structure regions (with a pLDDT score > 70) are any of the mutations on the surface of the protein and hence have a potential to interfere with protein-protein interaction events? List these mutations below (e.g. A130V)
+
