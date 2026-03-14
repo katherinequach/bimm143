@@ -6,7 +6,7 @@ My classwork for [BIMM 143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 
 *Introductory materials*
 
-- Class 4 [Intro to R]()
+- Class 4 [Intro to R](Week2/class04.md)
 
 - Class 5 [Data viz with ggplot](Week3/class05.md)
 
