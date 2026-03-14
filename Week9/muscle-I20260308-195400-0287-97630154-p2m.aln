@@ -1,0 +1,51 @@
+CLUSTAL multiple sequence alignment by MUSCLE (3.8)
+
+
+Domestic_cattle           ----------------YAHRAKNILNKPEVNQKLTKKALIKEYTEEIERLKRDLAAAREK
+Human_KLP                 ------------VQENIQQKSKDIVNK---------------------MTFHSQKFCADS
+Mus                       RKEVSVRTAGLTDKTSKKTYTFDMVFGASTKQIDVYRSVVCPILDEVIMGYNCTIFAYGQ
+Pig                       ------------------------------------------------------------
+Tropical_clawed_frog      ----------------RKTYTFDMVFGASTKQIDVYRSVVCPILDEVIMGYNCTIFAYGQ
+                                                                                      
+
+Domestic_cattle           NGVYISEENFRVMSGKLTVQEEQIVE--LIEKIGAVEEELNRVTELFMDNKNELDQC-KS
+Human_KLP                 DGFSQELRNFN-QEGTKLVEESVKHSDKLNGNLEKISQETEQRCESLNTRTVYFSEQWVS
+Mus                       TGTG---KTFT-MEGERSPNEVYTWEEDPLAGI--IPRTLHQIFEKLTDNGTEFSVK-VS
+Pig                       ---G---KTFT-MEGERSPNEEYTWEEDPLAGI--IPRTLHQIFEKLTDNGTEFSVK-VS
+Tropical_clawed_frog      TGTG---KTFT-MEGERSPNEEYTWEEDPLAGI--IPRTLHQIFEKLTDNGTEFSVK-VS
+                                  .*   .*    :*    .      :  :     .  * :  .   :.    *
+
+Domestic_cattle           DLQNKTQELETTQKHLQETKLQLVKEEYITSALESTEEKLHDAASKLLNTVEE-TTKDVS
+Human_KLP                 SLNEREQELHNLLEVVSQCCEASSSD--ITEKSDGRKAA-HEKQHNIF--LDQMTIDEDK
+Mus                       LLEIYNEELFDLLS--------PSSD--VSERLQMFDDP-RNKRGVIIKGLEEITVHNKD
+Pig                       LLEIYNEELFDLLN--------PSSD--VSERLQMFDDP-RNKRGVIIKGLEEITVHNKD
+Tropical_clawed_frog      LLEIYNEELFDLLN--------PSSD--VSERLQMFDDP-RNKRGVIIKGLEEITVHNKD
+                           *:   :**    .          .:  ::.  :  .   .:    ::  ::: *  : .
+
+Domestic_cattle           GLHSKLDRKKAVDQHNAEAQDIF--------------GKNLNSLFN------NMEELIKD
+Human_KLP                 LIAQNLELNETIKI-GLTKLNCFLEQDLKLDIPTGTTPQRKSYLYPSTLVRTEPREHLLD
+Mus                       EVYQILEKGAAKRTTAATLMNAY--------------SSRSHSVFSVTI---HMKXTTID
+Pig                       EVYQILEKGAAKRTTAATLMNAY--------------SSRSHSVFSVTI---HMKETTID
+Tropical_clawed_frog      EVYQILEKGAAKRTTAATLMNAY--------------SSRSHSVFSVTI---HMKETTID
+                           : . *:   :         : :               ..   ::              *
+
+Domestic_cattle           GSSKQKAMLEVHKTLFGNLLSSSVSALDTITTVALGSLTSIPENVSTHVSQIFNMILKEQ
+Human_KLP                 QLKRKQPELLMMLNCSENNKEETIPDVD-VEEAVLGQYTEEPLSQEPSVDAGVDCSSIGG
+Mus                       GEELVKIGKLNLVDLAGSENIGRSGAVD-KRAREA-------------------------
+Pig                       GEELVKIGKLNLVDLAGSENIGRSGAVD-KRAREAGNINQSLLTLGRVITALVERTP--H
+Tropical_clawed_frog      GEELVKIGKLNLVDLAGSENIGRSGAVD-KRAREAGNINQSLLTLGRVITALVERTP--H
+                            .  :           .        :*                                
+
+Domestic_cattle           SLAAESKTVL--------------------------------------------------
+Human_KLP                 VPFFQHKKSHGKDKE---------------------------------------------
+Mus                       ------------------------------------------------------------
+Pig                       VPYRESKLTRILQDSLGGRTRTSIIATISPASLNLEETLSTLEYAHRAKNILNKPEVNQK
+Tropical_clawed_frog      VPYRESKLTRILQDSL--------------------------------------------
+                                                                                      
+
+Domestic_cattle           --------------------------
+Human_KLP                 --------------------------
+Mus                       --------------------------
+Pig                       LTKKALIKEYTEEIERLKRDLAAARE
+Tropical_clawed_frog      --------------------------
+                                                    

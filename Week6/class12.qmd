@@ -1,0 +1,87 @@
+---
+title: "Class 12 Pt. 1 (RNASeq Galaxy)"
+author: "Katherine Quach (A18541014)"
+format: pdf
+toc: TRUE
+---
+
+## Section 1: Proportion of G/G in a population
+
+Downloaded a CSV file from Ensemble <https://useast.ensembl.org/Homo_sapiens/Variation/Sample?db=core;r=17:39895045-39895145;v=rs8067378;vdb=variation;vf=959672880#373531_tablePanel>
+
+> Q5: What proportion of the Mexican Ancestry in Los Angeles sample population (MXL) are
+homozygous for the asthma associated SNP (G|G)?
+
+[HINT: You can filter the displayed genotypes by entering the population code MXL. Then either
+
+count those of interest or download a CVS file for this population and use excel or the R functions read.csv(), and table() to answer this question] 
+
+Here we read this CSV file 
+```{r}
+mxl <-read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head (mxl)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.) / nrow(mxl) * 100
+```
+
+> Q6. Back on the ENSEMBLE page, use the “search for a sample” field above to find the
+particular sample HG00109. This is a male from the GBR population group. What is the
+genotype for this sample?
+
+Now let's look at a different population. I picked the GBR.
+
+```{r}
+gbr <- read.csv("373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+```
+
+Find proportion of GIG
+
+```{r}
+round(table(gbr$Genotype..forward.strand.) / nrow(gbr) * 100, 2)
+```
+
+This variant that is associated with childhood asthma is more frequent in the GBR populatio than the BKL population.
+
+Let's now dig into this further. 
+
+
+## Section 4: Population Scale Analysis [OPTIONAL]
+
+One sample is obviously not enough to know what is happening in a population. You are
+interested in assessing genetic differences on a population scale. So, you processed about
+~230 samples and did the normalization on a genome level. Now, you want to find whether
+there is any association of the 4 asthma-associated SNPs (rs8067378…) on ORMDL3
+expression.
+
+How many samples do we have?
+
+```{r}
+expr <- read.table("genotype.txt")
+head(expr)
+```
+
+```{r}
+nrow(expr)
+```
+
+```{r}
+table(expr$geno)
+```
+
+```{r}
+library(ggplot2)
+```
+
+Let's make a box pot
+
+```{r}
+ggplot(expr) + 
+  aes(geno, exp, fill=geno) +
+  geom_boxplot(notch=TRUE)
+```
